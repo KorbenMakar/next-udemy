@@ -19,6 +19,13 @@ import {Suspense} from "react";
 // }
 
 // const getCachedMeals = cacheFunction(getMeals);
+
+export const metadata = {
+    title: 'All Meals',
+    description: 'Super Meals for everybody!!!',
+};
+
+
 async function Meals() {
     const meals = await getMeals();
     return <MealsGrid meals={meals} />

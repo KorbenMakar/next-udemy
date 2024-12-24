@@ -5,11 +5,11 @@
     top: 0;
     left: 0;
     z-index: -1;
+}
 
-    svg {
-        display: block;
-        width: 100%;
-        height: auto;
-    }
+.header-background svg {
+    display: block;
+    width: 100%;
+    height: auto;
 }
 

@@ -2,12 +2,13 @@
 
 import {saveMeal} from "./meals";
 import {redirect} from 'next/navigation';
+import {revalidatePath} from "next/cache";
 
 function isInvalidText(text: string) {
-    return !text || text.trim() !== '';
+    return !text || text.trim() === '';
 }
 
-export async function shareMeal(formData: FormData) {
+export async function shareMeal(prevState: any,formData: FormData) {
     const meal = {
         title: formData.get('title') as string,
         summary: formData.get('summary') as string,
@@ -25,12 +26,13 @@ export async function shareMeal(formData: FormData) {
         isInvalidText(meal.creator_email) ||
         !meal.creator_email.includes('@') ||
         !meal.creator_email.includes('.')
-
-
     ) {
-        throw new Error('Invalid input');
+        return {
+            message: 'Invalid input.',
+        }
     }
 
     await saveMeal(meal);
+    revalidatePath(`/meals`);
     redirect(`/meals`);
 }

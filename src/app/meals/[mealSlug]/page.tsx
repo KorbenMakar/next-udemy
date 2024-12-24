@@ -3,11 +3,23 @@ import Image from 'next/image';
 import {getMeal} from "../../../../lib/meals";
 import {notFound} from "next/navigation";
 
+export async function generateMetadata({params}: { params: any }) {
+    const meal = getMeal(params.mealSlug);
 
-export default function MealDetailPage({params}: { params: { mealSlug: string } }) {
+    if (!meal) {
+        notFound();
+    }
+
+    return {
+        title: meal.title,
+        description: meal.summary
+    };
+}
+
+export default function MealDetailPage({params}: { params: any }) {
     const meal = getMeal(params.mealSlug);
     if (!meal) {
-        notFound()
+        notFound();
     }
 
     meal.instructions = meal.instructions.replace(/\n/g, '<br />');
@@ -33,5 +45,6 @@ export default function MealDetailPage({params}: { params: { mealSlug: string } 
                 </p>
             </main>
         </>
-    );
+    )
+        ;
 }
