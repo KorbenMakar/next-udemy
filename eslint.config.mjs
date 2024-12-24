@@ -1,3 +1,5 @@
+import compat from "eslint-config-next";
+
 const eslintConfig = [
   // Подключаем базовые Next/TS конфиги
   ...compat.extends("next/core-web-vitals", "next/typescript"),
