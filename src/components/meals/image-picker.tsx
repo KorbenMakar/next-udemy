@@ -8,6 +8,7 @@ export default function ImagePicker({label, name}: { label: string, name: string
     const [pickedImage, setPickedImage] = useState<string | ArrayBuffer | null>(null)
 
     const imageInput = useRef<HTMLInputElement | null>(null);
+
     function handlePickClick() {
         if (imageInput.current) {
             imageInput.current.click();

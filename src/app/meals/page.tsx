@@ -4,27 +4,10 @@ import {getMeals} from '../../../lib/meals';
 import MealsGrid from "@/components/meals/meals-grid";
 import {Suspense} from "react";
 
-// const cache = new Map();
-
-// function cacheFunction<T extends (...args: unknown[]) => Promise<unknown>>(fn: T): T {
-//     return (async function(...args: Parameters<T>): Promise<ReturnType<T>> {
-//         const key = JSON.stringify(args);
-//         if (cache.has(key)) {
-//             return cache.get(key) as ReturnType<T>;
-//         }
-//         const result = await fn(...args);
-//         cache.set(key, result as ReturnType<T>);
-//         return result as ReturnType<T>;
-//     }) as T;
-// }
-
-// const getCachedMeals = cacheFunction(getMeals);
-
 export const metadata = {
     title: 'All Meals',
     description: 'Super Meals for everybody!!!',
 };
-
 
 async function Meals() {
     const meals = await getMeals();
