@@ -13,6 +13,8 @@ export default function MainHeader() {
                 <Link href={'/'} className={classes.logo}>
                     <Image src={logoImg}
                            alt="A plate with food on it"
+                           width={80}
+                           height={80}
                            priority
                     />
                     NextLevel Food

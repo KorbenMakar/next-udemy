@@ -1,14 +1,14 @@
 'use server';
 
-import {saveMeal} from "./meals";
-import {redirect} from 'next/navigation';
-import {revalidatePath} from "next/cache";
+import {saveMeal} from './meals';
+import {revalidatePath} from 'next/cache';
+import {redirect} from "next/navigation";
 
 function isInvalidText(text: string) {
     return !text || text.trim() === '';
 }
 
-export async function shareMeal(prevState: any,formData: FormData) {
+export async function shareMeal(prevState: any, formData: FormData) {
     const meal = {
         title: formData.get('title') as string,
         summary: formData.get('summary') as string,
@@ -29,10 +29,22 @@ export async function shareMeal(prevState: any,formData: FormData) {
     ) {
         return {
             message: 'Invalid input.',
-        }
+        };
     }
 
-    await saveMeal(meal);
-    revalidatePath(`/meals`);
-    redirect(`/meals`);
+    try {
+        await saveMeal(meal);
+
+        revalidatePath(`/meals`);
+        redirect(`/meals`);
+
+    } catch (error: any) {
+
+        return {
+            message: error.message || 'An unknown error occurred.',
+        };
+    } finally {
+        formData.delete('image');
+        redirect(`/meals`);
+    }
 }

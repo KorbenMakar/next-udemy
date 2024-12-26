@@ -8,7 +8,6 @@ import MealsFormSubmit from "@/components/meals/meals-form-submit";
 import classes from './page.module.css';
 
 export default function ShareMealPage() {
-
     const [state, formAction] = useActionState(shareMeal, {message: ''});
     return (
         <>
