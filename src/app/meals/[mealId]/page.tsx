@@ -3,9 +3,9 @@ import { getMeal } from '../../../../lib/meals';
 import { notFound } from 'next/navigation';
 import classes from './page.module.css';
 
-export async function generateMetadata({ params }: { params: { mealId: string } }) {
-    const resolvedParams = await params;
-    const meal = await getMeal(resolvedParams.mealId);
+export async function generateMetadata({ params }: { params: any }) {
+    const { mealId } = await params; // Ожидаем params
+    const meal = await getMeal(mealId);
 
     if (!meal) {
         notFound();
@@ -17,16 +17,17 @@ export async function generateMetadata({ params }: { params: { mealId: string } 
     };
 }
 
-export default async function MealDetailPage({ params }: { params: { mealId: string } }) {
-    const resolvedParams = await params;
-    if (!resolvedParams.mealId) {
-        console.error('Invalid params:', resolvedParams);
+export default async function MealDetailPage({ params }: {  params: any }) {
+    const { mealId } = await params;
+
+    if (!mealId) {
+        console.error('Invalid params:', params);
         notFound();
     }
 
     let meal;
     try {
-        meal = await getMeal(resolvedParams.mealId);
+        meal = await getMeal(mealId);
     } catch (error) {
         console.error('Error fetching meal:', error);
         notFound();

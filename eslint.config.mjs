@@ -1,23 +1,20 @@
-import compat from "eslint-config-next";
-
-const eslintConfig = [
-  // Подключаем базовые Next/TS конфиги
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
-
-  // Добавляем свой объект конфигурации, в котором прописываем/переопределяем правила
-  {
-    rules: {
-      // Например, отключим правило о запрете any
-      "@typescript-eslint/no-explicit-any": "off",
-
-      // Или отключим правило о запрете ts-comment
-      "@typescript-eslint/ban-ts-comment": "off",
-
-      // Или любое другое правило
-      // "no-console": "warn",
-      // "eqeqeq": "error",
+const eslintConfig = {
+  extends: [
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "eslint:recommended",
+  ],
+  rules: {
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/react-in-jsx-scope": "off",
+  },
+  settings: {
+    react: {
+      version: "detect",
     },
   },
-];
+};
 
 export default eslintConfig;
