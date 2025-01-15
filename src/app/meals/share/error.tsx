@@ -1,6 +1,5 @@
 'use client';
 
-
 import {JSX} from "react";
 
 export default function Error(): JSX.Element {
